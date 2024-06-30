@@ -1,7 +1,8 @@
 <div align="center">
-  <img src="docs/assets/logo_name.png" alt="Logo" width="304" height="110">
+  <p><a href="https://helical.readthedocs.io/"/>
+  <img src="docs/assets/logo_and_text_v2.png" alt="Helical Logo" width=400>
+  </a></p>
 </div>
-
 
 # What is Helical ?
 
@@ -44,16 +45,17 @@ You can look directly into the example folder above and download the script of y
 ```
 git clone https://github.com/helicalAI/helical.git
 ```
-Within the `example` folder, open the notebook of your choice. We recommend starting with `Quick-Start_Tutorial.ipynb`
+Within the `examples/notebooks` folder, open the notebook of your choice. We recommend starting with `Quick-Start-Tutorial.ipynb`
 
 ### Current Examples:
 
 | Example | Description | Colab |
 | ----------- | ----------- |----------- |                                                        
-|[Quick-Start_Tutorial.ipynb](./examples/Quick-Start_Tutorial.ipynb)| A tutorial to quickly get used to the helical package and environment. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/Quick-Start_Tutorial.ipynb)|
-|[Geneformer-vs-UCE.ipynb](./examples/Geneformer-vs-UCE.ipynb) | Zero-Shot Reference Mapping with Geneformer & UCE and compare the outcomes. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/Geneformer-vs-UCE.ipynb) |
-|[Hyena-DNA-Inference.ipynb](./examples/Hyena-DNA-Inference.ipynb)|An example how to do probing with HyenaDNA by training a neural network on 18 downstream classification tasks.|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/Hyena-Dna-Inference.ipynb) |
-| Coming Soon | New models such as scGPT, SCimilarity, scVI; benchmarking scripts; new use cases; others |
+|[Quick-Start-Tutorial.ipynb](./examples/notebooks/Quick-Start-Tutorial.ipynb)| A tutorial to quickly get used to the helical package and environment. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Quick-Start-Tutorial.ipynb)|
+|[Geneformer-vs-UCE.ipynb](./examples/notebooks/Geneformer-vs-UCE.ipynb) | Zero-Shot Reference Mapping with Geneformer & UCE and compare the outcomes. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Geneformer-vs-UCE.ipynb) |
+|[Hyena-DNA-Inference.ipynb](./examples/notebooks/Hyena-DNA-Inference.ipynb)|An example how to do probing with HyenaDNA by training a neural network on 18 downstream classification tasks.|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Hyena-Dna-Inference.ipynb) |
+|[Cell-Type-Annotation.ipynb](./examples/notebooks/Cell-Type-Annotation.ipynb)|An example how to do probing with scGPT by training a neural network to predict cell type annotations.|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Cell-Type-Annotation.ipynb) |
+| Coming Soon | New models such as SCimilarity, scVI; benchmarking scripts; new use cases; others |
 
 ## Stuck somewhere ? Other ideas ?
 We are eager to help you and interact with you. Reach out via support@helical-ai.com. 
@@ -81,6 +83,7 @@ A lot of our models have been published by talend authors developing these excit
 - [anndata](https://github.com/scverse/anndata)
 - [scanpy](https://github.com/scverse/scanpy)
 - [transformers](https://github.com/huggingface/transformers)
+- [scikit-learn](https://github.com/scikit-learn/scikit-learn)
 
 ### Licenses
 
@@ -97,7 +100,7 @@ You can find the Licenses for each model implementation in the model repositorie
 Please use this BibTeX to cite this repository in your publications:
 
 ```
-@misc{helical,
+@software{helical,
   author = {Maxime Allard, Benoit Putzeys, Rick Schneider, Mathieu Klop},
   title = {Helical Python Package},
   year = {2024},

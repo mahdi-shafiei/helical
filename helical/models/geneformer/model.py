@@ -1,4 +1,4 @@
-from helical.models.helical import HelicalBaseModel
+from helical.models.base_models import HelicalRNAModel
 import logging
 from pathlib import Path
 import numpy as np
@@ -15,7 +15,7 @@ from accelerate import Accelerator
 import pickle as pkl
 
 LOGGER = logging.getLogger(__name__)
-class Geneformer(HelicalBaseModel):
+class Geneformer(HelicalRNAModel):
     """Geneformer Model. 
     The Geneformer Model is a transformer-based model that can be used to extract gene embeddings from single-cell RNA-seq data. 
 
@@ -70,22 +70,28 @@ class Geneformer(HelicalBaseModel):
             self.accelerator = None
         LOGGER.info(f"Model finished initializing.")
         
-    def process_data(self, data: AnnData,  nproc: int = 1,use_gene_symbols=True, output_path: Optional[str] = None) -> Dataset:   
+    def process_data(self, 
+                     data: AnnData,  
+                     gene_column_name: str = "ensembl_id", 
+                     nproc: int = 1, 
+                     output_path: Optional[str] = None) -> Dataset:   
         """Processes the data for the UCE model
 
         Parameters 
         ----------
         data : AnnData
             The AnnData object containing the data to be processed. It is important to note that the Geneformer uses Ensembl IDs to identify genes.
-            The input AnnData object should have a column named 'ensembl_id' or a column with the gene symbols called 'gene_symbols'. 
-            Should you use the gene symbols, please set the use_gene_symbols parameter to True.
             Currently the Geneformer only supports human genes.
-
             If you already have the ensembl_id column, you can skip the mapping step.
+        gene_column_name: str, optional, default = "ensembl_id"
+            The column in adata.var that contains the gene names. If you set this string to something other than "ensembl_id", 
+            we will map the gene symbols in that column to Ensembl IDs with a mapping taken from the `Ensembl Website https://www.ensembl.org/`.
+            If it is left at "ensembl_id", there will be no mapping.
+            If this variable is set to "index", the index of the AnnData object will be used and mapped to Ensembl IDs.
+            In the special case where the data has Ensemble IDs as the index, and you pass "index". This would result in invalid mappings.
+            In that case, it is recommended to create a new column with the Ensemble IDs in the data and pass "ensembl_id" as the gene_column_name.
         nproc : int, optional, default = 1
             Number of processes to use for dataset processing.
-        use_gene_symbols : bool, default = True
-            Set this boolean to True if you want to use gene symbols instead of Ensembl IDs. We will map the gene symbols to Ensembl IDs with a mapping taken from the `Ensembl Website <https://www.ensembl.org/`_.
         output_path : str, default = None
             Whether to save the tokenized dataset to the specified output_path.
 
@@ -96,23 +102,25 @@ class Geneformer(HelicalBaseModel):
             The tokenized dataset in the form of a Hugginface Dataset object.
             
         """ 
+        self.check_data_validity(data, gene_column_name)
+
         files_config = {
             "mapping_path": self.config.model_dir / "human_gene_to_ensemble_id.pkl",
             "gene_median_path": self.config.model_dir / "gene_median_dictionary.pkl",
             "token_path": self.config.model_dir / "token_dictionary.pkl"
         }
 
-        if use_gene_symbols:
+        # map gene symbols to ensemble ids if provided
+        if gene_column_name != "ensembl_id":          
             mappings = pkl.load(open(files_config["mapping_path"], 'rb'))
-            data.var['ensembl_id'] = data.var['gene_symbols'].apply(lambda x: mappings.get(x,{"id":None})['id'])
+            data.var['ensembl_id'] = data.var[gene_column_name].apply(lambda x: mappings.get(x,{"id":None})['id'])
 
         # load token dictionary (Ensembl IDs:token)
         with open(files_config["token_path"], "rb") as f:
             self.gene_token_dict = pickle.load(f)
             self.pad_token_id = self.gene_token_dict.get("<pad>")
 
-        self.tk = TranscriptomeTokenizer({"cell_type": "cell_type"}, 
-                                         nproc=nproc, 
+        self.tk = TranscriptomeTokenizer(nproc=nproc, 
                                          gene_median_file = files_config["gene_median_path"], 
                                          token_dictionary_file = files_config["token_path"])
 
@@ -148,3 +156,26 @@ class Geneformer(HelicalBaseModel):
             self.device
         )
         return embeddings.cpu().detach().numpy()
+
+
+    def check_data_validity(self, data: AnnData, gene_column_name: str) -> None:
+        """Checks if the data is eligible for processing by the Geneformer model  
+
+        Parameters
+        ----------
+        dataset : Dataset
+            The AnnData object containing the data to be processed.
+        gene_column_name: str
+            The column in adata.var that contains the gene names.
+
+        Raises
+        ------
+        KeyError
+            If the data is missing column names.
+        """
+        self.check_rna_data_validity(data, gene_column_name)
+
+        if not 'n_counts' in data.obs.columns.to_list():
+            message = f"Data must have the 'obs' keys 'n_counts' to be processed by the Geneformer model."
+            LOGGER.error(message)
+            raise KeyError(message)

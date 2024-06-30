@@ -1,8 +1,12 @@
-```{image} assets/logo_name.png
+```{image} assets/logo_and_text_v2.png
 :alt: "Logo"
 :width: 400px
 :align: center
+:target: https://helical.readthedocs.io/
+
 ```
+
+
 # What is Helical ?
 
 Helical provides a framework for state-of-the-art pre-trained bio foundation models on genomics and transcriptomics modalities.
@@ -44,16 +48,17 @@ You can look directly into the example folder above and download the script of y
 ```
 git clone https://github.com/helicalAI/helical.git
 ```
-Within the `example` folder, open the notebook of your choice. We recommend starting with `Quick-Start_Tutorial.ipynb`
+Within the `example/notebooks` folder, open the notebook of your choice. We recommend starting with `Quick-Start-Tutorial.ipynb`.
 
 ### Current Examples:
 
 | Example | Description | Colab |
 | ----------- | ----------- |----------- |                                                        
-|[Quick-Start_Tutorial.ipynb](https://github.com/helicalAI/helical/blob/main/examples/Quick-Start_Tutorial.ipynb)| A tutorial to quickly get used to the helical package and environment. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/Quick-Start_Tutorial.ipynb)|
-|[Geneformer-vs-UCE.ipynb](https://github.com/helicalAI/helical/blob/main/examples/Geneformer-vs-UCE.ipynb) | Zero-Shot Reference Mapping with Geneformer & UCE and compare the outcomes. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/Geneformer-vs-UCE.ipynb) |
-|[Hyena-DNA-Inference.ipynb](./examples/Hyena-DNA-Inference.ipynb)|An example how to do probing with HyenaDNA by training a neural network on 18 downstream classification tasks.|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/Hyena-DNA-Inference.ipynb)|
-| Coming Soon | New models such as scGPT, SCimilarity, scVI; benchmarking scripts; new use cases; others |
+|[Quick-Start-Tutorial.ipynb](https://github.com/helicalAI/helical/blob/main/examples/notebooks/Quick-Start-Tutorial.ipynb)| A tutorial to quickly get used to the helical package and environment. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Quick-Start-Tutorial.ipynb)|
+|[Geneformer-vs-UCE.ipynb](https://github.com/helicalAI/helical/blob/main/examples/notebooks/Geneformer-vs-UCE.ipynb) | Zero-Shot Reference Mapping with Geneformer & UCE and compare the outcomes. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Geneformer-vs-UCE.ipynb) |
+|[Hyena-DNA-Inference.ipynb](https://github.com/helicalAI/helical/blob/main/examples/notebooks/Hyena-DNA-Inference.ipynb)|An example how to do probing with HyenaDNA by training a neural network on 18 downstream classification tasks.|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Hyena-DNA-Inference.ipynb)|
+|[Cell-Type-Annotation.ipynb](https://github.com/helicalAI/helical/blob/main/examples/notebooks/Cell-Type-Annotation.ipynb)|An example how to do probing with scGPT by training a neural network to predict cell type annotations.|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/helicalAI/helical/blob/main/examples/notebooks/Cell-Type-Annotation.ipynb) |
+| Coming Soon | New models such as SCimilarity, scVI; benchmarking scripts; new use cases; others |
 
 ## Stuck somewhere ? Other ideas ?
 We are eager to help you and interact with you. Reach out via support@helical-ai.com. 

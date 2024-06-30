@@ -12,11 +12,15 @@ parts:
   - file: docs/hyena_dna.rst
 - caption: RNA Tutorials🪄
   chapters:
-  - file : examples/Geneformer-vs-UCE
-  - file: examples/Quick-Start_Tutorial
+  - file : examples/notebooks/Geneformer-vs-UCE
+  - file: examples/notebooks/Quick-Start_Tutorial
+  - file: examples/notebooks/Cell-Type-Annotation
 - caption: DNA Tutorials🪄
   chapters:
-  - file: examples/Hyena-DNA-Inference
+  - file: examples/notebooks/Hyena-DNA-Inference
+- caption: Benchmarking 📊
+  chapters:
+  - file: docs/benchmarking/description
   # - file : examples/geneformer_example
 
 # - caption: Basic examples 🪄

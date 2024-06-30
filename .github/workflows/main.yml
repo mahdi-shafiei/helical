@@ -47,18 +47,18 @@ jobs:
       #     pytest-coverage-path: ./pytest-coverage.txt
       #     junitxml-path: ./pytest.xml
 
-      - name: Execute scGPT
-        run: |
-          python examples/run_scgpt.py
-
       - name: Execute Geneformer
         run: |
-          python examples/run_geneformer.py
+          python examples/run_models/run_geneformer.py
+
+      - name: Execute scGPT
+        run: |
+          python examples/run_models/run_scgpt.py
 
       - name: Execute UCE
         run: |
-          python examples/run_uce.py
+          python examples/run_models/run_uce.py
 
       - name: Execute Hyena
         run: |
-          python examples/run_hyena_dna.py
+          python examples/run_models/run_hyena_dna.py
